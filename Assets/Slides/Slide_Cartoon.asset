@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_Cartoon
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/AdvancedOutline\" \r\n{\r\n\r\nProperties \r\n{\r\n
+    \ _Color (\"Color\", Color) = (1,1,1,1)\r\n  _RampTex (\"RampTex\", 2D) = \"white\"
+    {}\r\n  _Outline (\"Outline Widht\", Range(0.0,1.0)) = 0.0\r\n  _OutlineColor
+    (\"Outline Color\", Color) = (1,1,1,1)\r\n}\r\n\r\nSubShader \r\n{\r\n\r\nTags
+    \r\n{ \r\n  \"RenderType\"=\"Opaque\" \r\n}\r\n\r\nCull Off\r\n\r\nCGPROGRAM\r\n#pragma
+    surface surf ToonRamp\r\n\r\nfloat4 _Color;\r\nsampler2D _RampTex;\r\n\r\nfloat4
+    LightingToonRamp(SurfaceOutput s, fixed3 lightDir, fixed atten)\r\n{\r\n  float
+    diff = dot(s.Normal, lightDir);\r\n  float h = diff * 0.5 + 0.5;\r\n  float2 rh
+    = h;\r\n  float3 ramp = tex2D(_RampTex, rh).rgb;\r\n\r\n  float4 c;\r\n  c.rgb
+    = s.Albedo * _LightColor0.rgb * ramp;\r\n  c.a = s.Alpha;\r\n\r\n  return c;\r\n}\r\n\r\nstruct
+    Input\r\n{\r\n  float2 uv_MainTex;\r\n};\r\n\r\nvoid surf (Input IN, inout SurfaceOutput
+    o) \r\n{\r\n  o.Albedo = _Color.rgb;\r\n}\r\nENDCG\r\n\r\n// Outline\r\n// Vertex
+    fragment, need a pass\r\nPass\r\n{\r\n    // Culling the front, only show backfaces\r\n
+    \   Cull Front\r\n\r\nCGPROGRAM\r\n    #pragma vertex vert\r\n    #pragma fragment
+    frag\r\n\r\n    #include \"UnityCG.cginc\"\r\n\r\n    struct appdata{\r\n        float4
+    vertex : POSITION;\r\n        float3 normal : NORMAL;\r\n    };\r\n\r\n    struct
+    v2f{\r\n        float4 pos: SV_POSITION;\r\n        fixed4 color: COLOR;\r\n    };\r\n\r\n
+    \   float _Outline;\r\n    float4 _OutlineColor;\r\n\r\n\r\n// the vertex shader\r\nv2f
+    vert(appdata v)\r\n{\r\n    v2f o;\r\n    o.pos = UnityObjectToClipPos(v.vertex);\r\n\r\n//
+    multiplying the normal with a 3x3 matrix, \r\n// then normalize it => put it to
+    worldspace\r\n// instead of local space\r\n\r\n    float3 norm = normalize( mul((float3x3)UNITY_MATRIX_IT_MV,v.normal));\r\n\r\n
+    \   float2 offset = TransformViewToProjection(norm.xy);\r\n    \r\n    o.pos.xy
+    += offset * _Outline;\r\n    o.color = _OutlineColor;\r\n    return o;\r\n}\r\n\r\n\r\n//
+    the fragment shader\r\nfixed4 frag(v2f i) : SV_Target\r\n{\r\n    return i.color;\r\n}\r\n\r\n\r\nENDCG
+    \           \r\n    }\r\n  }\r\n  FallBack \"Diffuse\"\r\n}"
+  material: {fileID: 2100000, guid: 1925759b9e51944c0a02b864b5a6e01e, type: 2}
+  shader: {fileID: 4800000, guid: 059f7983768234c3b974025db2950978, type: 3}
+  lineHeight: 4750

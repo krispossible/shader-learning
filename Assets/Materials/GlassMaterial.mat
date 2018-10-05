@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: GlassMaterial
   m_Shader: {fileID: 4800000, guid: a85a01192c5b742798acef56cf9f2c9b, type: 3}
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: e730be40c436649178a022f0edc3d39f, type: 3}
+        m_Texture: {fileID: 2800000, guid: a2960ffde020f27409e070d92fb2e00b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:

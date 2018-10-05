@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: SpecularBlinnPhong
   m_Shader: {fileID: 4800000, guid: ba8bb2a0a3c5b4bbf90d4218f86a6a5b, type: 3}

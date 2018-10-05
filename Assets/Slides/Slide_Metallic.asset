@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_Metallic
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/PBRStandard\" \r\n{\r\n\r\nProperties \r\n{\r\n  _Color
+    (\"Color\", Color) = (1,1,1,1)\r\n  _MetallicTex (\"Metallic (R)\", 2D) = \"white\"
+    {}\r\n  _Metallic (\"Metallic\", Range(0,1)) = 0.0\r\n}\r\n\r\nSubShader \r\n{\r\n\r\nTags
+    \r\n{ \r\n  \"RenderType\"=\"Opaque\" \r\n}\r\n\r\nCGPROGRAM\r\n  #pragma surface
+    surf Standard \r\n  fixed4 _Color;\r\n  sampler2D _MetallicTex;\r\n  half _Metallic;\r\n
+    \   \r\n  struct Input\r\n  {\r\n      float2 uv_MetallicTex;\r\n  };\r\n    \r\nvoid
+    surf(Input IN, inout SurfaceOutputStandard o)\r\n{\r\no.Albedo = _Color.rgb;\r\no.Smoothness
+    = tex2D (_MetallicTex, IN.uv_MetallicTex).r;\r\no.Metallic = _Metallic;\r\n}\r\nENDCG\r\n}\r\n\tFallBack
+    \"Diffuse\"\r\n}"
+  material: {fileID: 2100000, guid: ffd6b6aade92b4eeea10223d23d8bb89, type: 2}
+  shader: {fileID: 4800000, guid: 3bc8fb1445a114bab9e08a397addebca, type: 3}
+  lineHeight: 1700

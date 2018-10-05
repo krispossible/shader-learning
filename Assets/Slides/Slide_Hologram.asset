@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_Hologram
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/Hologram\" \r\n{\r\n\r\nProperties \r\n{    \r\n  _RimColor
+    (\"Rim Color\", Color) = (0.0,0.5,0.5,0.0)\r\n  _RimPower (\"Rim Power\", Range(0.5,8.0))
+    = 3.0\r\n}\r\n\r\nSubShader \r\n{\r\n\r\nTags\r\n{\r\n   \"Queue\" = \"Transparent\"\r\n}\r\n\r\nPass\r\n{\r\n
+    \   ZWrite On\r\n    ColorMask 0\r\n}\r\n\r\nCGPROGRAM\r\n    #pragma surface
+    surf Lambert alpha:fade\r\n    \r\n    float4 _RimColor;\r\n    float _RimPower;\r\n
+    \   \r\n    struct Input\r\n    {\r\n        float3 viewDir;\r\n    };\r\n    \r\n
+    \   \r\nvoid surf (Input IN, inout SurfaceOutput o) \r\n{    \r\n\r\nhalf rim
+    = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));  \r\n      \r\no.Emission
+    =_RimColor.rgb * pow(rim, _RimPower)*10;\r\n        \r\no.Alpha = pow(rim, _RimPower);\r\n
+    \               \r\n}\r\nENDCG\r\n}\r\n\tFallBack \"Diffuse\"\r\n}"
+  material: {fileID: 2100000, guid: 9c8dcbd8e6ee242f3898e592ce8ec7a1, type: 2}
+  shader: {fileID: 4800000, guid: ba5cb4fca62c74a2e9b548b118353199, type: 3}
+  lineHeight: 2000

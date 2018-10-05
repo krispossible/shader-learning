@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_Matrix
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/Matrix\"\r\n{\r\n    Properties\r\n    {\r\n        _Grid
+    (\"Grid\", range(1, 50.)) = 30.\r\n        _SpeedMax (\"Speed Max\", range(0,
+    30.)) = 20.\r\n        _SpeedMin (\"Speed Min\", range(0, 10.)) = 2.\r\n        _Density
+    (\"Density\", range(0, 30.)) = 5.\r\n    }\r\n \r\n    SubShader\r\n    {\r\n
+    \       Tags { \"RenderType\"=\"Opaque\" }\r\n \r\n        Pass\r\n        {\r\n
+    \           CGPROGRAM\r\n            #pragma vertex vert_img\r\n            #pragma
+    fragment frag\r\n            #include \"UnityCG.cginc\"\r\n \r\n            float
+    noise(float x)\r\n            {\r\n                return frac(sin(x) * 43758.5453);\r\n
+    \           }\r\n \r\n            float noise(float2 vect)\r\n            {\r\n
+    \               return frac(sin(dot(vect, float2(5372.156, 8452.751))) * 1643.268);\r\n
+    \           }\r\n \r\n            float texelValue(float2 ipos, float n){\r\n
+    \               for(float i = 0.; i < 5.; i++){\r\n                    for(float
+    j = 0.; j < 3.; j++)\r\n                    {\r\n                        if (i
+    == ipos.y && j == ipos.x ) {\r\n                            return step(1., fmod(n,
+    2.));\r\n                        }\r\n                       \r\n                        n
+    = ceil(n / 2.);\r\n                    }\r\n                }\r\n                return
+    0.;\r\n            }\r\n \r\n            float _Density;\r\n \r\n            float
+    char(float2 st, float n){\r\n                    st.x = st.x * 2. - .5;\r\n                    st.y
+    = st.y * 1.2 - .1;\r\n \r\n                    float2 ipos = floor(st * float2(3.,
+    5.));\r\n \r\n                    n = floor(fmod(n, 20. + _Density));\r\n \r\n
+    \                   float digit = 0.0;\r\n                   \r\n                    if
+    (n < 1. ) { digit = 9712.; }\r\n                    else if (n < 2. ) { digit
+    = 21158.0; }\r\n                    else if (n < 3. ) { digit = 25231.0; }\r\n
+    \                   else if (n < 4. ) { digit = 23187.0; }\r\n                    else
+    if (n < 5. ) { digit = 23498.0; }\r\n                    else if (n < 6. ) { digit
+    = 31702.0; }\r\n                    else if (n < 7. ) { digit = 25202.0; }\r\n
+    \                   else if (n < 8. ) { digit = 30163.0; }\r\n                    else
+    if (n < 9. ) { digit = 18928.0; }\r\n                    else if (n < 10. ) {
+    digit = 23531.0; }\r\n                    else if (n < 11. ) { digit = 29128.0;
+    }\r\n                    else if (n < 12. ) { digit = 17493.0; }\r\n                    else
+    if (n < 13. ) { digit = 7774.0; }\r\n                    else if (n < 14. ) {
+    digit = 31141.0; }\r\n                    else if (n < 15. ) { digit = 29264.0;
+    }\r\n                    else if (n < 16. ) { digit = 3641.0; }\r\n                    else
+    if (n < 17. ) { digit = 31315.0; }\r\n                    else if (n < 18. ) {
+    digit = 31406.0; }\r\n                    else if (n < 19. ) { digit = 30864.0;
+    }\r\n                    else if (n < 20. ) { digit = 31208.0; }\r\n                    else
+    { digit = 1.0; }\r\n \r\n                    float tex = texelValue(ipos, digit);\r\n
+    \r\n                    float2 borders = float2(1., 1.);\r\n                    borders
+    *= step(0., st) * step(0., 1. - st);\r\n \r\n                    return step(.1,
+    1. - tex) * borders.x * borders.y;\r\n            }\r\n \r\n            float
+    _Grid;\r\n            float _SpeedMax;\r\n            float _SpeedMin;\r\n \r\n
+    \           fixed4 frag (v2f_img i) : SV_Target\r\n            {\r\n                float2
+    ipos = floor(i.uv * _Grid);\r\n                float2 fpos = frac(i.uv * _Grid);\r\n
+    \r\n                ipos.y += floor(_Time.y * max(_SpeedMin, _SpeedMax * noise(ipos.x)));\r\n
+    \               float charNum = noise(ipos);\r\n                float val = char(fpos,
+    (20. + _Density) * charNum);\r\n                return fixed4(0, val, 0, 1.0);\r\n
+    \           }\r\n            ENDCG\r\n        }\r\n    }\r\n}\r\n"
+  material: {fileID: 2100000, guid: 866b939ea24de4008a63183763b21616, type: 2}
+  shader: {fileID: 4800000, guid: 73b7e58498c604d5aa4c270926fcbb9d, type: 3}
+  lineHeight: 5000

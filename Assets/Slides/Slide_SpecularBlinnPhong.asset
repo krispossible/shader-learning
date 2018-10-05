@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_SpecularBlinnPhong
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/SpecularBlinnPhong\" \r\n{\r\n\r\nProperties\r\n{\r\n
+    _Colour(\"Colour\",Color) = (1,1,1,1)\r\n _SpecColor(\"SpecularColour\", Color)
+    = (1,1,1,1)\r\n _Spec(\"Specular\",Range(0,1)) = 0.5\r\n _Gloss(\"Gloss\",Range(0,1))
+    = 0.5 \r\n}\r\n\r\nSubShader\r\n{\r\n\r\nTags\r\n{\r\n    \"Queue\" = \"Geometry\"\r\n}\r\n
+    \   \r\nCGPROGRAM\r\n    #pragma surface surf BlinnPhong\r\n    float4 _Colour;\r\n
+    \   half _Spec;\r\n    fixed _Gloss;\r\n\r\n    struct Input\r\n    {\r\n        float2
+    uv_MainTex;\r\n    };\r\n    \r\n    void surf (Input IN, inout SurfaceOutput
+    o) \r\n    {\r\n        o.Albedo = _Colour.rgb;\r\n        o.Specular = _Spec;\r\n
+    \       o.Gloss = _Gloss;\r\n    }    \r\nENDCG\r\n\r\n}\r\n\tFallBack \"Diffuse\"\r\n}"
+  material: {fileID: 2100000, guid: bb5e83c48ca8644f1a270ed01797e796, type: 2}
+  shader: {fileID: 4800000, guid: ba8bb2a0a3c5b4bbf90d4218f86a6a5b, type: 3}
+  lineHeight: 1750

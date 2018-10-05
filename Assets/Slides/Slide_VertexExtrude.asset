@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_VertexExtrude
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/VertexExtrude\" \r\n{\r\n\r\nProperties \r\n{\r\n  _MainTex
+    (\"Albedo (RGB)\", 2D) = \"white\" {}\r\n  _Amount (\"Amount\", Range(-0.003,0.003))
+    = 0.0\r\n}\r\n\r\nSubShader \r\n{\r\n\r\nTags \r\n{\r\n  \"RenderType\"=\"Opaque\"
+    \r\n  \"ForceNoShadowCasting\"=\"True\"\r\n}\r\n\r\nCGPROGRAM\r\n// include the
+    vertex shader at the end\r\n#pragma surface surf Lambert vertex:vert\r\nsampler2D
+    _MainTex;\r\n\r\nstruct Input \r\n{\r\n    float2 uv_MainTex;\r\n};\r\n\r\n//
+    vertex shader inside a surface shader\r\n// vertex shader program begin\r\nstruct
+    appdata\r\n{\r\n  float4 vertex: POSITION;\r\n  float3 normal: NORMAL;\r\n  float4
+    texcoord: TEXCOORD1;\r\n};\r\n\r\nfloat _Amount;\r\n\r\nvoid vert (inout appdata
+    v)\r\n{\r\n  v.vertex.xyz += v.normal * _Amount;\r\n}\r\n\r\n// surface shader
+    program start    \r\nvoid surf (Input IN, inout SurfaceOutput o) \r\n{\r\n  o.Albedo
+    = tex2D(_MainTex, IN.uv_MainTex).rgb;\r\n}\r\n\r\nENDCG\r\n\r\n}\r\n  FallBack
+    \"Diffuse\"\r\n}\r\n"
+  material: {fileID: 2100000, guid: 684910e5238464251b5aae50fe88dee5, type: 2}
+  shader: {fileID: 4800000, guid: 28a53b30168494094a176d7d44c55f8c, type: 3}
+  lineHeight: 2500

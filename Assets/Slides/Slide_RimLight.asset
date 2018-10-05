@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1704615460ef840b0861c57c511b969f, type: 3}
+  m_Name: Slide_RimLight
+  m_EditorClassIdentifier: 
+  slideText: "Shader \"Custom/RimLightShader\" \r\n{\r\n\r\nProperties \r\n{\r\n  _AlbedoColor(\"AlbedoColor\",
+    Color) = (1,1,1,1)\r\n  _Color (\"Color\", Color) = (1,1,1,1)\r\n  _Power (\"Power\",
+    Range(0.5, 10.0)) = 3.0\r\n}\r\n\t\r\nSubShader \r\n{\r\n\r\nCGPROGRAM\r\n    #pragma
+    surface surf Standard      \r\n    \r\n    struct Input \r\n    {\r\n        float3
+    viewDir;\r\n    };\r\n    \r\n    float4 _AlbedoColor;\r\n    float4 _Color;\r\n
+    \   float  _Power;\r\n    \r\nvoid surf (Input IN, inout SurfaceOutputStandard
+    o) \r\n{\r\n\r\nhalf rim = 1-saturate(dot(normalize(IN.viewDir), o.Normal));\r\n\r\no.Emission
+    = _Color.rgb * rim > 0.5 ? rim : 0;\r\n\r\n}    \r\nENDCG\r\n\r\n}  \r\n\tFallBack
+    \"Diffuse\"\r\n}"
+  material: {fileID: 2100000, guid: ed8e83f9c20bd4fb685996b7e6ddf5c0, type: 2}
+  shader: {fileID: 4800000, guid: 6d7a453f9163b4362ac1920353ee2c8b, type: 3}
+  lineHeight: 1500
