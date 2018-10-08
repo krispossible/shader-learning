@@ -14,6 +14,15 @@ Tags
    "RenderType"="Opaque" 
 }
 
+// Shader Level of Detail
+// by default its infinite,
+// so it gets the max value
+// the device can handle
+// 
+// But you can drop down
+// for better performance
+// 
+// Vertex Lit = 100
 LOD 100
 
 // If we use vertex and fragment together, need to put in a pass

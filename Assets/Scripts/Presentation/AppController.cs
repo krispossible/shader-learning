@@ -37,11 +37,18 @@ namespace Presentation
 
 		private void Start()
 		{
+			_catUI.SetActive(!false);
+			_catGameObject.SetActive(!false);
+			_introUI.SetActive(!true);
+			
+			/*
 			_catUI.SetActive(false);
 			_catGameObject.SetActive(false);
 			_introUI.SetActive(true);
-			
 			SetValues();
+			*/
+			
+			
 		}
 
 		private void NextSlide()
